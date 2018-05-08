@@ -14,9 +14,6 @@ TP_Downhole	KEYWORD1	TP_Downhole
 
 getTemperature	KEYWORD2
 getPressure		KEYWORD2
-GetVoltage 		KEYWORD2
-GetVoltageRaw	KEYWORD2
-SetMode			KEYWORD2
 begin			KEYWORD2
 
 
