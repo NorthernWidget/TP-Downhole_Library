@@ -22,8 +22,6 @@ Distributed as-is; no warranty is given.
 TP_Downhole::TP_Downhole()
 // Base library type I2C
 {
-    pressure = new MS5803();
-    adc = new MCP3421(); //Initialize MCP3425 with default address, 0x6A
 }
 
 
@@ -105,10 +103,11 @@ uint8_t TP_Downhole::begin(model Model)
             }
             break;
     }
-    uint8_t ErrorPressure = pressure -> begin(PresAdr, PresMax);
-    pressure -> reset();
-    uint8_t ErrorADC = adc-> Begin();
-    adc -> SetResolution(18);
+    pressure.reset();
+    uint8_t ErrorPressure = pressure.begin(PresAdr, PresMax);
+    
+    uint8_t ErrorADC = adc.Begin();
+    adc.SetResolution(18);
 
     if(ErrorADC == 0 && ErrorPressure == 0) return 0;
     else return -1; //Retun failure is both devices are not connected 
@@ -116,10 +115,10 @@ uint8_t TP_Downhole::begin(model Model)
 
 float TP_Downhole::getTemperature(uint8_t Location) //Returns temp in C from either subsensor
 {
-    if(Location == 0) return pressure -> getTemperature(CELSIUS, ADC_512);
+    if(Location == 0) return pressure.getTemperature(CELSIUS, ADC_512);
     if(Location == 1) {
-        adc -> SetResolution(18);  //Make sure resolution is set on onboard ADC
-        float Val = adc -> GetVoltage(); //Get a voltage conversion from ADC
+        adc.SetResolution(18);  //Make sure resolution is set on onboard ADC
+        float Val = adc.GetVoltage(); //Get a voltage conversion from ADC
         Val = VRef - Val; //Voltage is measure across thermistor, not relative to ground
         float Temp = TempConvert(Val, VRef, R0, ThermCoefs[0], ThermCoefs[1], ThermCoefs[2], ThermCoefs[3], ThermR);  //Make conversion to temp
         Temp = Temp - 273.15; //Convert from Kelvin to C
@@ -137,7 +136,7 @@ float TP_Downhole::getTemperature() //By default get thermistor temp value
 float TP_Downhole::getPressure()
 // Return a pressure reading units mBar.
 {
-    return pressure -> getPressure(ADC_4096);
+    return pressure.getPressure(ADC_4096);
 }
 
 float TP_Downhole::TempConvert(float V, float Vcc, float R, float B, float R25){

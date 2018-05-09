@@ -38,8 +38,8 @@ class TP_Downhole
 {
 public:
     TP_Downhole();  // Constructor
-    MS5803 *pressure;
-    MCP3421 *adc; //Initialize MCP3425 with default address, 0x6A
+    MS5803 pressure;
+    MCP3421 adc; //Initialize MCP3425 with default address, 0x6A
     uint8_t begin(model Model); // Collect model value
 
     // Return calculated temperature from sensor
