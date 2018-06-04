@@ -1,17 +1,17 @@
 /******************************************************************************
-MS5803_I2C.h
-Library for MS5803 pressure sensor.
+TP_Downhole.h
+Library for TP-Downhole pressure and tempurature sensor, made by Northern Widget LLC.
 Bobby Schulz @ Northern Widget LLC
-6/26/2014
-https://github.com/sparkfun/MS5803-14BA_Breakout
+5/9/2018
+Hardware info located at: https://github.com/NorthernWidget/TP-DownHole
 
-The MS5803 is a media isolated temperature and pressure sensor made by
-Measurment Specialties which can be used to measure either water pressure
-and depth, or baramatric (atmospheric) pressure, and altitude along with that
+The TP-Downhole is a small form factor tempreture and pressure sensor which uses a combination of an 
+MS5803 pressure sensor and an MCP3421 ADC in combination with a thermistor for high accuracy
+tempreture measurment.
 
-"Instruments register only through things they're designed to register.
-Space still contains infinite unknowns."
--Mr. Spock
+"Size matter not. Look at me. Judge me by my size do you? And well you should not. For my ally is the
+Force, and a powerful ally it is"
+-Yoda
 
 Distributed as-is; no warranty is given.
 ******************************************************************************/
