@@ -81,6 +81,19 @@ uint8_t TP_Downhole::begin(model Model)
             }
             break;
 
+        case(TP5v2):
+            {
+            PresMax = 5;
+            PresAdr = 0x77;
+            ThermB = 3435;
+            VRef = 1.8;
+            R0 = 10000;
+            ThermR = 10000;
+            float CoefTemp4[] = {0.003354016, 0.0003074038, 1.019153E-05, 9.093712E-07};
+            memcpy(ThermCoefs, CoefTemp4, 4);
+            }
+            break;
+
         case(TP2b2):
             {
             PresMax = 2;
@@ -105,6 +118,8 @@ uint8_t TP_Downhole::begin(model Model)
     }
     pressure.reset();
     uint8_t ErrorPressure = pressure.begin(PresAdr, PresMax);
+
+
     
     uint8_t ErrorADC = adc.Begin();
     adc.SetResolution(18);

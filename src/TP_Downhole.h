@@ -30,6 +30,7 @@ enum model
     TP2v1 = 0x0201,
     TP5v1 = 0x0501,
     TP2v2 = 0x0202,
+    TP5v2 = 0x0502,
     TP2b2 = 0x2B02,
     TP2A2 = 0x2A02
 };
