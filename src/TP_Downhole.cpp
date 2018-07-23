@@ -166,3 +166,13 @@ float TP_Downhole::TempConvert(float V, float Vcc, float R, float A, float B, fl
   float T = 1.0/(A + B*LogRt + C*pow(LogRt, 2.0) + D*pow(LogRt, 3.0));
   return T;
 }
+
+String TP_Downhole::GetHeader() 
+{
+    return "Pressure [mBar], Temp DH [C], Temp DHt [C],"; //return header string
+}
+
+String TP_Downhole::GetString()
+{
+    return String(getPressure()) + "," + String(getTemperature(0)) + "," + String(getTemperature(1)); //Return data string
+}
