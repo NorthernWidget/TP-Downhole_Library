@@ -5,7 +5,9 @@ TP_Downhole Sensor; //Initalize TP-Downhole sensor
 void setup() {
   Serial.begin(9600);  //Begin serial 
   Serial.println("Welcome to the Machine...\n\n");  //Print default dummy message
-  Sensor.begin(TP2v2);  //Select sensor type, see options below
+  pinMode(12, OUTPUT);
+  digitalWrite(12, LOW);
+  Sensor.begin(TP5v1);  //Select sensor type, see options below
   //Sensor type will be embost in the body of the sensor, and on a label at the top of the cable
   //This type designator identifies the configuration of the sensor address and other features
   //Values include:
@@ -14,6 +16,7 @@ void setup() {
   //TP5v1
   //TP2b2
   //TP2A2
+
 }
 
 void loop() {

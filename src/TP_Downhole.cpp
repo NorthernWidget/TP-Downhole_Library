@@ -62,7 +62,7 @@ uint8_t TP_Downhole::begin(model Model)
             ThermB = 3435;
             VRef = 3.3;
             R0 = 47000;
-            ThermR = 10000;
+            ThermR = 47000;
             float CoefTemp3[] = {0.003354016, 0.0003074038, 1.019153E-05, 9.093712E-07};
             memcpy(ThermCoefs, CoefTemp3, 4);
             }
@@ -169,10 +169,10 @@ float TP_Downhole::TempConvert(float V, float Vcc, float R, float A, float B, fl
 
 String TP_Downhole::GetHeader() 
 {
-    return "Pressure [mBar], Temp DH [C], Temp DHt [C],"; //return header string
+    return "Pressure [mBar], Temp DH [C], Temp DHt [C], "; //return header string
 }
 
 String TP_Downhole::GetString()
 {
-    return String(getPressure()) + "," + String(getTemperature(0)) + "," + String(getTemperature(1)); //Return data string
+    return String(getPressure()) + "," + String(getTemperature(0)) + "," + String(getTemperature(1)) + ","; //Return data string
 }
