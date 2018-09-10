@@ -33,6 +33,7 @@ uint8_t TP_Downhole::begin(model Model)
             {
             PresMax = 2;
             PresAdr = 0x77;
+            TempAdr = 0x6A;
             ThermB = 3435;
             VRef = 3.3;
             R0 = 47000;
@@ -46,6 +47,7 @@ uint8_t TP_Downhole::begin(model Model)
             {
             PresMax = 2;
             PresAdr = 0x77;
+            TempAdr = 0x6A;
             ThermB = 3435;
             VRef = 3.3;
             R0 = 47000;
@@ -59,6 +61,7 @@ uint8_t TP_Downhole::begin(model Model)
             {
             PresMax = 5;
             PresAdr = 0x77;
+            TempAdr = 0x6A;
             ThermB = 3435;
             VRef = 3.3;
             R0 = 47000;
@@ -72,6 +75,7 @@ uint8_t TP_Downhole::begin(model Model)
             {
             PresMax = 2;
             PresAdr = 0x77;
+            TempAdr = 0x6A;
             ThermB = 3435;
             VRef = 1.8;
             R0 = 10000;
@@ -85,6 +89,7 @@ uint8_t TP_Downhole::begin(model Model)
             {
             PresMax = 5;
             PresAdr = 0x77;
+            TempAdr = 0x6A;
             ThermB = 3435;
             VRef = 1.8;
             R0 = 10000;
@@ -98,6 +103,7 @@ uint8_t TP_Downhole::begin(model Model)
             {
             PresMax = 2;
             PresAdr = 0x76;
+            TempAdr = 0x6A;
             ThermB = 3435;
             VRef = 0; //No external thermistor 
             }
@@ -107,6 +113,21 @@ uint8_t TP_Downhole::begin(model Model)
             {
             PresMax = 2;
             PresAdr = 0x76;
+            TempAdr = 0x6A;
+            ThermB = 3435;
+            VRef = 1.8;
+            R0 = 10000;
+            ThermR = 10000;
+            float CoefTemp6[] = {0.003354016, 0.0003074038, 1.019153E-05, 9.093712E-07};
+            memcpy(ThermCoefs, CoefTemp6, 4);
+            }
+            break;
+
+        case(TP2a2):
+            {
+            PresMax = 2;
+            PresAdr = 0x76;
+            TempAdr = 0x6B;
             ThermB = 3435;
             VRef = 1.8;
             R0 = 10000;
@@ -121,8 +142,8 @@ uint8_t TP_Downhole::begin(model Model)
 
 
     
-    uint8_t ErrorADC = adc.Begin();
-    adc.SetResolution(18);
+    uint8_t ErrorADC = adc.Begin(TempAdr)
+;    adc.SetResolution(18);
 
     if(ErrorADC == 0 && ErrorPressure == 0) return 0;
     else return -1; //Retun failure is both devices are not connected 

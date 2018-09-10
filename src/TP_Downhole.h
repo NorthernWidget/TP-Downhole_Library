@@ -32,7 +32,8 @@ enum model
     TP2v2 = 0x0202,
     TP5v2 = 0x0502,
     TP2b2 = 0x2B02,
-    TP2A2 = 0x2A02
+    TP2A2 = 0x2A02,
+    TP2a2 = 0x2A03
 };
 
 class TP_Downhole
@@ -54,6 +55,7 @@ public:
 private:
     uint8_t PresMax = 2; //Maximum pressure for the sensor used
     uint8_t PresAdr = 0x77; //The address used by the MS5803 part of the TP-Downhole
+    uint8_t TempAdr = 0x6A; //the address used by the MCP3421 ADC on board the TP-Downhole
     float ThermB = 3435; //Basic B value for thermistor 
     float ThermCoefs[4] = {0.003354016, 0.0003074038, 1.019153E-05, 9.093712E-07}; //Coefficients for enhanced accuracy
     float VRef = 1.8; //Voltage referance used for thermistor
