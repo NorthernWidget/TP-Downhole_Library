@@ -20,8 +20,8 @@ Distributed as-is; no warranty is given.
 #define TP_Downhole_h
 
 #include <Arduino.h>
-#include "MCP3421.h"
-#include "MS5803.h"
+#include <MCP3421.h>
+#include <MS5803.h>
 
 //Models
 enum model

@@ -9,7 +9,7 @@ The TP-Downhole is a small form factor tempreture and pressure sensor which uses
 MS5803 pressure sensor and an MCP3421 ADC in combination with a thermistor for high accuracy
 tempreture measurment.
 
-"Size matter not. Look at me. Judge me by my size do you? And well you should not. For my ally is the
+"Size matters not. Look at me. Judge me by my size do you? And well you should not. For my ally is the
 Force, and a powerful ally it is"
 -Yoda
 
@@ -142,8 +142,8 @@ uint8_t TP_Downhole::begin(model Model)
 
 
     
-    uint8_t ErrorADC = adc.Begin(TempAdr)
-;    adc.SetResolution(18);
+    uint8_t ErrorADC = adc.Begin(TempAdr);
+    adc.SetResolution(18);
 
     if(ErrorADC == 0 && ErrorPressure == 0) return 0;
     else return -1; //Retun failure is both devices are not connected 
