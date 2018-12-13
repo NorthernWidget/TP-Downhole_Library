@@ -37,6 +37,8 @@ public:
     String GetHeader();
     String GetString();
     //Longbow utilities
+    uint8_t GetBaud();
+    uint8_t SetBaud(long Baud);
     uint8_t SetAddress(uint8_t NewAdr, uint8_t Adr); 
     uint8_t SetWidgetAddress(uint8_t NewAdr);
     uint8_t Reset();

@@ -51,7 +51,7 @@ float TP_Downhole_Longbow::getTemperature(uint8_t Location) //Returns temp in C 
 
 float TP_Downhole_Longbow::getTemperature() //By default get thermistor temp value
 {
-    getTemperature(1); 
+    return getTemperature(1); 
 }
 
 
@@ -87,12 +87,26 @@ uint8_t TP_Downhole_Longbow::SetAddress(uint8_t NewAdr, uint8_t Adr) //Set new L
     SendData(0, 3); //Set send bit, keep UART on
 }
 
+uint8_t TP_Downhole_Longbow::SetBaud(long Baud)
+{
+    Baud = Baud/1200; //Convert to baud multiple
+    SendData(97, Baud);
+    return GetBaud(); //Read baud back
+}
+
+uint8_t TP_Downhole_Longbow::GetBaud()
+{
+    // GetPacket(5, ADR); //Call for updated data
+    GetPacket(96, ADR); //Get baud rate
+    return Data_Out;
+}
+
 uint8_t TP_Downhole_Longbow::SetWidgetAddress(uint8_t NewAdr)
 {
     Wire.beginTransmission(0x00);  //Use general call address
     Wire.write(99);  //Write to address set register
     Wire.write(NewAdr);  //Write new address
-    Serial.println(Wire.endTransmission()); //DEBUG!
+    return Wire.endTransmission(); //DEBUG!
 }
 
 uint8_t TP_Downhole_Longbow::Reset() 
