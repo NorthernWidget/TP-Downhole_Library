@@ -52,6 +52,10 @@ public:
     String GetHeader();
     String GetString();
 
+    uint8_t ThermRes = 18; //Use 18 bits by default
+    precision PresRes = ADC_4096; //Use 12 bit resolution by default
+    precision TempRes = ADC_512; //Use 11 bit resolution by default
+
 private:
     uint8_t PresMax = 2; //Maximum pressure for the sensor used
     uint8_t PresAdr = 0x77; //The address used by the MS5803 part of the TP-Downhole

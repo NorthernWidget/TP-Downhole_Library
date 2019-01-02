@@ -143,7 +143,7 @@ uint8_t TP_Downhole::begin(model Model)
 
     
     uint8_t ErrorADC = adc.Begin(TempAdr);
-    adc.SetResolution(18);
+    adc.SetResolution(ThermRes);
 
     if(ErrorADC == 0 && ErrorPressure == 0) return 0;
     else return -1; //Retun failure is both devices are not connected 
@@ -151,10 +151,10 @@ uint8_t TP_Downhole::begin(model Model)
 
 float TP_Downhole::getTemperature(uint8_t Location) //Returns temp in C from either subsensor
 {
-    if(Location == 0) return pressure.getTemperature(CELSIUS, ADC_512);
+    if(Location == 0) return pressure.getTemperature(CELSIUS, TempRes);
     if(Location == 1) {
-        adc.SetResolution(18);  //Make sure resolution is set on onboard ADC
-        float Val = adc.GetVoltage(); //Get a voltage conversion from ADC
+        adc.SetResolution(ThermRes);  //Make sure resolution is set on onboard ADC
+        float Val = adc.GetVoltage(false); //Get a voltage conversion from ADC, allow use of stale values for faster sampling (since thermistor changes "very slowly")
         Val = VRef - Val; //Voltage is measure across thermistor, not relative to ground
         float Temp = TempConvert(Val, VRef, R0, ThermCoefs[0], ThermCoefs[1], ThermCoefs[2], ThermCoefs[3], ThermR);  //Make conversion to temp
         Temp = Temp - 273.15; //Convert from Kelvin to C
@@ -172,7 +172,7 @@ float TP_Downhole::getTemperature() //By default get thermistor temp value
 float TP_Downhole::getPressure()
 // Return a pressure reading units mBar.
 {
-    return pressure.getPressure(ADC_4096);
+    return pressure.getPressure(PresRes);  //Sample at specified pressure resolution 
 }
 
 float TP_Downhole::TempConvert(float V, float Vcc, float R, float B, float R25){
